@@ -1,0 +1,374 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 215 80% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 25% 90%;
+    --secondary-foreground: 215 80% 35%;
+
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 200 85% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 215 80% 35%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 220 30% 15%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 200 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 22%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 25% 22%;
+    --sidebar-ring: 200 85% 55%;
+    --sidebar-muted: 220 20% 40%;
+
+    --chart-1: 215 80% 35%;
+    --chart-2: 200 85% 45%;
+    --chart-3: 145 63% 42%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 0 72% 51%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(215, 80%, 35%), hsl(200, 85%, 45%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(220, 30%, 15%), hsl(220, 35%, 10%));
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+    --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 220 15% 90%;
+    --card: 220 28% 12%;
+    --card-foreground: 220 15% 90%;
+    --popover: 220 28% 12%;
+    --popover-foreground: 220 15% 90%;
+    --primary: 200 85% 55%;
+    --primary-foreground: 220 30% 8%;
+    --secondary: 220 25% 18%;
+    --secondary-foreground: 220 15% 85%;
+    --muted: 220 25% 16%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 200 85% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 18%;
+    --input: 220 25% 18%;
+    --ring: 200 85% 55%;
+    --sidebar-background: 220 35% 8%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 200 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 25% 15%;
+    --sidebar-ring: 200 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .financial-table {
+    @apply w-full text-sm;
+  }
+
+  .financial-table th {
+    @apply bg-primary text-primary-foreground px-4 py-2.5 text-left font-semibold text-xs uppercase tracking-wider;
+  }
+
+  .financial-table td {
+    @apply px-4 py-2 border-b border-border;
+  }
+
+  .financial-table tr:hover td {
+    @apply bg-muted/50;
+  }
+
+  .financial-table .row-total td {
+    @apply font-bold bg-secondary border-t-2 border-primary/20;
+  }
+
+  .financial-table .row-subtotal td {
+    @apply font-semibold bg-muted/70;
+  }
+
+  .financial-table .row-header td {
+    @apply font-bold text-primary bg-primary/5;
+  }
+
+  .financial-table .value-negative {
+    @apply text-destructive;
+  }
+
+  .financial-table .value-positive {
+    @apply text-success;
+  }
+
+  .stat-card {
+    @apply bg-card rounded-lg p-5 shadow-sm border border-border hover:shadow-md transition-shadow;
+  }
+
+  .upload-zone {
+    @apply border-2 border-dashed border-primary/30 rounded-lg p-8 text-center hover:border-primary/60 hover:bg-primary/5 transition-all cursor-pointer;
+  }
+
+  .page-header {
+    @apply mb-6;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-foreground;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-muted-foreground mt-1;
+  }
+
+  /* Balanço Patrimonial - Accounting Report Layout */
+  .bp-report {
+    @apply bg-white p-6;
+    font-family: 'Times New Roman', 'Georgia', serif;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bp-container {
+    display: flex;
+    flex: 1;
+    gap: 0;
+  }
+
+  .bp-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.25rem;
+  }
+
+  .bp-flex-spacer {
+    flex: 1;
+  }
+
+  .bp-table {
+    @apply w-full border-collapse;
+    color: hsl(0, 0%, 10%);
+    font-size: 0.82rem;
+  }
+
+  .bp-thead-row {
+    border-bottom: 2px solid hsl(0, 0%, 10%);
+  }
+
+  .bp-th {
+    @apply py-1.5 px-2 text-left font-normal;
+    font-size: 0.82rem;
+    color: hsl(0, 0%, 10%);
+    background: transparent;
+  }
+
+  .bp-th.bp-right {
+    @apply text-right;
+  }
+
+  .bp-cell {
+    @apply py-1 px-2;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .bp-right {
+    @apply text-right;
+  }
+
+  .bp-indent {
+    @apply pl-8;
+  }
+
+  .bp-bold {
+    @apply font-bold;
+  }
+
+  .bp-delta {
+    color: hsl(0, 0%, 40%);
+    font-size: 0.78rem;
+  }
+
+  .bp-row:hover td {
+    background: transparent;
+  }
+
+  .bp-line-top {
+    border-top: 1px solid hsl(0, 0%, 10%);
+  }
+
+  .bp-line-double {
+    border-top: 2px solid hsl(0, 0%, 10%);
+    border-bottom: 3px double hsl(0, 0%, 10%);
+  }
+
+  .bp-subtotal td {
+    /* spacing via spacer rows */
+  }
+
+  .bp-total td {
+    padding-top: 0.75rem;
+  }
+
+  .bp-spacer td {
+    height: 0.6rem;
+  }
+
+  .bp-section-header td {
+    @apply font-bold pt-2;
+    font-size: 0.82rem;
+  }
+
+  @media print {
+    .bp-report {
+      min-height: auto;
+      height: 100%;
+      padding: 1cm;
+    }
+    @page {
+      size: A4 landscape;
+      margin: 1cm;
+    }
+  }
+
+  /* DRE - Accounting Report Layout (Portrait A4) */
+  .dre-report {
+    @apply bg-white p-6;
+    font-family: 'Times New Roman', 'Georgia', serif;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dre-subtitle {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: hsl(0, 0%, 30%);
+    margin-bottom: 1.5rem;
+    margin-top: -0.5rem;
+  }
+
+  .dre-table {
+    @apply w-full border-collapse;
+    color: hsl(0, 0%, 10%);
+    font-size: 0.82rem;
+  }
+
+  .dre-thead-row {
+    border-bottom: 2px solid hsl(0, 0%, 10%);
+  }
+
+  .dre-th {
+    @apply py-1.5 px-2 text-left font-normal;
+    font-size: 0.82rem;
+    color: hsl(0, 0%, 10%);
+    background: transparent;
+  }
+
+  .dre-th.dre-right {
+    @apply text-right;
+  }
+
+  .dre-cell {
+    @apply py-1 px-2;
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+
+  .dre-right {
+    @apply text-right;
+  }
+
+  .dre-bold {
+    @apply font-bold;
+  }
+
+  .dre-delta {
+    color: hsl(0, 0%, 40%);
+    font-size: 0.78rem;
+  }
+
+  .dre-row:hover td {
+    background: transparent;
+  }
+
+  .dre-line-top {
+    border-top: 1px solid hsl(0, 0%, 10%);
+  }
+
+  .dre-line-double {
+    border-top: 2px solid hsl(0, 0%, 10%);
+    border-bottom: 3px double hsl(0, 0%, 10%);
+  }
+
+  .dre-total-row td {
+    padding-top: 0.4rem;
+  }
+
+  .dre-spacer td {
+    height: 0.5rem;
+  }
+
+  @media print {
+    .dre-report {
+      min-height: auto;
+      padding: 1cm;
+    }
+    @page {
+      size: A4 portrait;
+      margin: 1cm;
+    }
+  }
+
+  /* PDF export: hide interactive controls */
+  .pdf-exporting .print\\:hidden,
+  .pdf-exporting select,
+  .pdf-exporting button {
+    display: none !important;
+  }
+}
