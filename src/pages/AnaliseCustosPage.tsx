@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReportHeader from '@/components/ReportHeader';
 import { useFinanceStore, formatCurrency, type CustoItem } from '@/store/financeStore';
 import { getGrupoCusto, gruposOrdem } from '@/lib/custosClassificacao';
@@ -68,8 +68,18 @@ export default function AnaliseCustosPage() {
     };
   }, [custos]);
 
-  const [ano, setAno] = useState(() => anosDisponiveis[0] || '2024');
-  const [mes, setMes] = useState('01');
+  // Default to the most recent period with data
+  const ultimoPeriodo = useMemo(() => Object.keys(custos).sort().pop() || '', [custos]);
+  const [ano, setAno] = useState(() => ultimoPeriodo.split('-')[0] || String(new Date().getFullYear()));
+  const [mes, setMes] = useState(() => ultimoPeriodo.split('-')[1] || '01');
+
+  useEffect(() => {
+    if (ultimoPeriodo && !anosDisponiveis.includes(ano)) {
+      const [ultimoAno, ultimoMes] = ultimoPeriodo.split('-');
+      setAno(ultimoAno);
+      setMes(ultimoMes);
+    }
+  }, [ultimoPeriodo, anosDisponiveis, ano]);
   const [centrosCustoSelecionados, setCentrosCustoSelecionados] = useState<Set<string>>(new Set());
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const [expandedContas, setExpandedContas] = useState<Set<string>>(new Set());

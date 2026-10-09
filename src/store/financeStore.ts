@@ -87,7 +87,8 @@ export const useFinanceStore = create<FinanceStore>()((set, get) => ({
   uploads: [],
   contaFaturamento: null,
   classificacaoCustos: {},
-  loading: false,
+  // Start as loading so pages only mount once the data is available
+  loading: true,
   loaded: false,
 
   fetchAll: async () => {

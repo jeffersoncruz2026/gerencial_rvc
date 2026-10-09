@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useLatestOption } from '@/hooks/useLatestOption';
 import { useFinanceStore, formatCurrency, getBalanceteKey } from '@/store/financeStore';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -21,8 +22,8 @@ const COLORS = [
 
 export default function FaturamentoPage() {
   const { custos, balancetes, dePara } = useFinanceStore();
-  const custosKeys = Object.keys(custos).sort();
-  const balanceteKeys = Object.keys(balancetes).sort();
+  const custosKeys = useMemo(() => Object.keys(custos).sort(), [custos]);
+  const balanceteKeys = useMemo(() => Object.keys(balancetes).sort(), [balancetes]);
 
   // Use custos data if available, otherwise fallback to balancetes
   const hasCustos = custosKeys.length > 0;
@@ -33,7 +34,7 @@ export default function FaturamentoPage() {
     return Array.from(ySet).sort();
   }, [hasCustos, custosKeys, balanceteKeys]);
 
-  const [selectedYear, setSelectedYear] = useState(years[years.length - 1] || '');
+  const [selectedYear, setSelectedYear] = useLatestOption(years);
 
   // === CUSTOS-BASED ANALYSIS ===
   const faturamentoData = useMemo(() => {

@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useLatestOption } from '@/hooks/useLatestOption';
 import { useFinanceStore, formatCurrency, calcAH, getBalanceteKey } from '@/store/financeStore';
 import ReportHeader from '@/components/ReportHeader';
 import { exportToPDF } from '@/lib/pdfExport';
@@ -86,8 +87,8 @@ function Spacer() {
 
 export default function BalancoPage() {
   const { balancetes, dePara } = useFinanceStore();
-  const keys = Object.keys(balancetes).sort();
-  const [selectedKey, setSelectedKey] = useState(keys[keys.length - 1] || '');
+  const keys = useMemo(() => Object.keys(balancetes).sort(), [balancetes]);
+  const [selectedKey, setSelectedKey] = useLatestOption(keys);
 
   const data = useMemo(() => {
     if (!selectedKey) return null;

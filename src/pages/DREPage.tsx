@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useLatestOption } from '@/hooks/useLatestOption';
 import { useFinanceStore, formatCurrency, calcAH, getBalanceteKey } from '@/store/financeStore';
 import ReportHeader from '@/components/ReportHeader';
 import { exportToPDF } from '@/lib/pdfExport';
@@ -92,8 +93,8 @@ function fmtDelta(cur: number, prev: number): string {
 
 export default function DREPage() {
   const { balancetes, dePara } = useFinanceStore();
-  const keys = Object.keys(balancetes).sort();
-  const [selectedKey, setSelectedKey] = useState(keys[keys.length - 1] || '');
+  const keys = useMemo(() => Object.keys(balancetes).sort(), [balancetes]);
+  const [selectedKey, setSelectedKey] = useLatestOption(keys);
   const [viewMode, setViewMode] = useState<'mensal' | 'acumulado'>('acumulado');
 
   const data = useMemo(() => {
