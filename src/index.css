@@ -275,92 +275,16 @@
     }
   }
 
-  /* DRE - Accounting Report Layout (Portrait A4) */
-  .dre-report {
-    @apply bg-white p-6;
-    font-family: 'Times New Roman', 'Georgia', serif;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dre-subtitle {
-    font-family: 'Times New Roman', 'Georgia', serif;
-    font-size: 0.85rem;
-    font-style: italic;
-    color: hsl(0, 0%, 30%);
-    margin-bottom: 1.5rem;
-    margin-top: -0.5rem;
-  }
-
-  .dre-table {
-    @apply w-full border-collapse;
-    color: hsl(0, 0%, 10%);
-    font-size: 0.82rem;
-  }
-
-  .dre-thead-row {
-    border-bottom: 2px solid hsl(0, 0%, 10%);
-  }
-
-  .dre-th {
-    @apply py-1.5 px-2 text-left font-normal;
-    font-size: 0.82rem;
-    color: hsl(0, 0%, 10%);
-    background: transparent;
-  }
-
-  .dre-th.dre-right {
-    @apply text-right;
-  }
-
-  .dre-cell {
-    @apply py-1 px-2;
-    font-size: 0.82rem;
-    line-height: 1.8;
-  }
-
-  .dre-right {
-    @apply text-right;
-  }
-
-  .dre-bold {
-    @apply font-bold;
-  }
-
-  .dre-delta {
-    color: hsl(0, 0%, 40%);
-    font-size: 0.78rem;
-  }
-
-  .dre-row:hover td {
-    background: transparent;
-  }
-
-  .dre-line-top {
-    border-top: 1px solid hsl(0, 0%, 10%);
-  }
-
-  .dre-line-double {
-    border-top: 2px solid hsl(0, 0%, 10%);
-    border-bottom: 3px double hsl(0, 0%, 10%);
-  }
-
-  .dre-total-row td {
-    padding-top: 0.4rem;
-  }
-
-  .dre-spacer td {
-    height: 0.5rem;
-  }
-
+  /* DRE - print (A4 landscape) */
   @media print {
-    .dre-report {
-      min-height: auto;
-      padding: 1cm;
+    #dre-report {
+      background: #ffffff;
+    }
+    #dre-pdf-resumo {
+      break-after: page;
     }
     @page {
-      size: A4 portrait;
+      size: A4 landscape;
       margin: 1cm;
     }
   }
@@ -370,5 +294,20 @@
   .pdf-exporting select,
   .pdf-exporting button {
     display: none !important;
+  }
+
+  .pdf-exporting,
+  .pdf-exporting .bg-background {
+    background: #ffffff !important;
+  }
+
+  /* html2canvas mis-measures tabular figures, adding stray gaps */
+  .pdf-exporting,
+  .pdf-exporting * {
+    font-variant-numeric: normal !important;
+  }
+
+  .pdf-exporting .pdf-only {
+    display: block !important;
   }
 }

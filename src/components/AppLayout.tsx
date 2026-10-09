@@ -49,10 +49,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const navItems = isAdmin ? [...publicNavItems, ...adminNavItems] : publicNavItems;
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden print:block print:h-auto print:overflow-visible">
       {/* Sidebar */}
       <aside
-        className={`flex flex-col bg-sidebar text-sidebar-foreground transition-all duration-300 ${
+        className={`flex flex-col print:hidden bg-sidebar text-sidebar-foreground transition-all duration-300 ${
           collapsed ? 'w-16' : 'w-60'
         }`}
         style={{ background: 'var(--gradient-sidebar)' }}
@@ -128,7 +128,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto print:overflow-visible">
         <div className="p-6 max-w-[1400px] mx-auto animate-fade-in">
           {children}
         </div>
