@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { useLatestOption } from '@/hooks/useLatestOption';
 import { useFinanceStore, formatCurrency } from '@/store/financeStore';
 import {
   DollarSign, TrendingUp, TrendingDown, BarChart3, Receipt,
@@ -97,9 +98,7 @@ export default function Dashboard() {
   const balanceteKeys = useMemo(() => Object.keys(balancetes).sort(), [balancetes]);
   const years = useMemo(() => [...new Set(balanceteKeys.map((k) => k.split('-')[0]))].sort(), [balanceteKeys]);
 
-  const [selectedPeriod, setSelectedPeriod] = useState<string>(() =>
-    balanceteKeys[balanceteKeys.length - 1] || ''
-  );
+  const [selectedPeriod, setSelectedPeriod] = useLatestOption(balanceteKeys);
 
   const selectedYear = selectedPeriod ? selectedPeriod.split('-')[0] : years[years.length - 1] || '';
   const previousYear = selectedYear ? String(Number(selectedYear) - 1) : '';
